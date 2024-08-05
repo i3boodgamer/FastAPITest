@@ -3,7 +3,6 @@ import uvicorn
 from api_v1 import router as router_v1
 
 from contextlib import asynccontextmanager
-from core.models import Base, db_helper
 from core.config import settings
 
 from typing import Annotated
@@ -20,8 +19,6 @@ from users.views import router as users_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    async with db_helper.engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
         
     yield
     
