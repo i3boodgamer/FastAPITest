@@ -11,7 +11,7 @@ if TYPE_CHECKING:
     from .user import User
 
 class Post(UserRelationMixin, Base):
-    _user_back_populates = "user"
+    _user_back_populates = "posts"
     
     title: Mapped[str] = mapped_column(String(100), unique = True)
     body: Mapped[str] = mapped_column(
@@ -19,3 +19,9 @@ class Post(UserRelationMixin, Base):
         default = "",
         server_default = "",
     )
+    
+    def __str__(self):
+        return f"{self.__class__.__name__} (id = {self.id}) (title = ){self.title!r}"
+    
+    def __repr__(self):
+        return str(self)

@@ -9,7 +9,7 @@ class DatabaseHelper:
     def __init__(self, url: str, echo: bool = False):
         self.engine = create_async_engine(
             url = url,
-            echo = settings.DB_echo,
+            echo = settings.DB_ECHO,
         )
         self.session_factor = async_sessionmaker(
             bind = self.engine,
@@ -32,5 +32,5 @@ class DatabaseHelper:
 
 db_helper = DatabaseHelper(
     url = settings.DB_URL.get_secret_value(),
-    echo = settings.DB_echo
+    echo = settings.DB_ECHO,
 )
